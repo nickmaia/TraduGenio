@@ -1,0 +1,14 @@
+venv
+AWS
+conection_openai.py
+.env
+env
+pycache
+__pycache__
+comece_por_aqui.py
+dockerfile
+resumo.ipynb
+.vercel
+.vscode
+vercel.json
+middleware.py

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <title>TraduGenius</title>
+  <link rel="icon" href="/static/logo.svg" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+  <div class="brand-header">
+
+    <img src="/static/logo.svg" alt="Logo TraduGenius" class="brand-logo" />
+
+    <div class="brand-info">
+      <h1 class="brand-title">TraduGenius</h1>
+      <p class="brand-tagline">Tradução instantânea e profissional</p>
+    </div>
+  </div>
+
+  <!-- CONTÊINER PRINCIPAL DO CHAT -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Seu Tradutor Inteligente</h2>
+    </div>
+
+    <!-- Área de mensagens -->
+    <div class="chat-window" id="chatWindow">
+      <div class="message bot">
+        <p>Olá! Em que posso ajudar?</p>
+      </div>
+    </div>
+
+    <!-- Campo de entrada + botão enviar -->
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Digite sua mensagem..." autocomplete="off" />
+      <button id="sendBtn">Enviar</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT PRINCIPAL -->
+  
+  <script>
+    const chatWindow = document.getElementById("chatWindow");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+  
+    function renderMarkdown(mdText) {
+      // Converte Markdown para HTML
+      return marked.parse(mdText);
+    }
+  
+    function createMessage(text, sender, isMarkdown = false) {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("message", sender);
+  
+      // Converte sempre o texto para HTML (via Markdown)
+      msgDiv.innerHTML = renderMarkdown(text);
+  
+      chatWindow.appendChild(msgDiv);
+  
+      // Rolagem automática
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+  
+    // Envio do texto
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      createMessage(text, "user");
+      userInput.value = "";
+  
+      try {
+        const response = await fetch("/translate/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input_str: text }),
+        });
+        const data = await response.json();
+        createMessage(data.translated_text, "bot", true);
+      } catch (error) {
+        console.error("Erro na requisição:", error);
+        createMessage("Desculpe, houve um erro ao traduzir.", "bot");
+      }
+    }
+  
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CORPO DA PÁGINA */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    /* Cinza muito claro */
+    color: #333;
+    /* Mantém a página centralizada em coluna */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* SEÇÃO DE MARCA (LOGO + INFO) */
+.brand-header {
+    width: 100%;
+    max-width: 700px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 0 16px;
+}
+
+/* Logo (opcional) */
+.brand-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #0174df;
+}
+
+/* Container para texto da marca */
+.brand-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    color: #0174df;
+    font-weight: bold;
+}
+
+.brand-tagline {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 4px;
+}
+
+/* CONTÊINER PRINCIPAL DO CHAT */
+.chat-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* CABEÇALHO DO CHAT */
+.chat-header {
+    background: #0174df;
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* ÁREA DAS MENSAGENS */
+.chat-window {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+/* MENSAGENS (BASE) */
+.message {
+    margin-bottom: 12px;
+    max-width: 80%;
+    line-height: 1.5;
+    padding: 12px;
+    border-radius: 6px;
+    clear: both;
+}
+
+/* MENSAGENS DO USUÁRIO */
+.message.user {
+    background: #e0f2ff;
+    /* Azul clarinho */
+    float: right;
+    text-align: right;
+}
+
+/* MENSAGENS DO BOT */
+.message.bot {
+    background: #f0f0f0;
+    /* Cinza clarinho */
+    float: left;
+    text-align: left;
+}
+
+/* ENTRADA DE TEXTO E BOTÃO */
+.chat-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.chat-input button {
+    border: none;
+    background: #0174df;
+    color: #fff;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.chat-input button:hover {
+    background: #005bb5;
+}
